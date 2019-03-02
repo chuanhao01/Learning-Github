@@ -9,10 +9,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Python/Calculator (Ver 1.9).py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-969" />
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -31,7 +33,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -39,10 +40,22 @@
               <item name="Learning-Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Learning-Github" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Learning-Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Learning-Github" type="462c0819:PsiDirectoryNode" />
+              <item name="Front-end code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Learning-Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Learning-Github" type="462c0819:PsiDirectoryNode" />
+              <item name="Front-end code" type="462c0819:PsiDirectoryNode" />
+              <item name="Html" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -103,9 +116,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="333" y="8" width="1403" height="1034" extended-state="0" />
+    <frame x="270" y="4" width="1403" height="1034" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981685" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16043957" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -126,7 +139,9 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Python/Calculator (Ver 1.9).py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-969" />
+      </provider>
     </entry>
   </component>
 </project>
