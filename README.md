@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,3 +9,7 @@
 
 </body>
 </html>
+=======
+# Learning-Github
+Just a github for fun
+>>>>>>> parent of 7108136... updating
