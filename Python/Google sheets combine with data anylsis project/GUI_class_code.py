@@ -71,37 +71,13 @@ class UseageGUI(Frame):
         # Update
         self.updateButtonFrame = Frame(self, width=300, height=40)
         self.updateButtonFrame.grid(row=2, column=1, columnspan=3)
-        self.updateButton = Button(self.updateButtonFrame, text="Update", command=lambda :self.getDataFromEntries())
+        self.updateButton = Button(self.updateButtonFrame, text="Update")
         self.updateButton.config(width=20, height=2)
         self.updateButton.place(anchor="center", x=150, y=20)
 
-    # when update button gets pressed, data from the entry fields are taken, placed in a list, checked.
-    # If the types mtach what the type should be the data is then let through
-    def getDataFromEntries(self):
-        self.listOfDataFromEntry = []
-        self.listOfDataFromEntry.append(self.dateEntry.get())
-        self.listOfDataFromEntry.append(self.monthEntry.get())
-        self.listOfDataFromEntry.append(self.yearEntry.get())
-        self.listOfDataFromEntry.append(self.amountEntry.get())
-        self.listOfDataFromEntry.append(self.categoryEntry.get())
-        self.checkDataType()
 
-    # Checks the data type from the listofentries
-    def checkDataType(self):
-        for i in range(5):
-            if i < 3:
-                try:
-                    self.listOfDataFromEntry[i] = int(self.listOfDataFromEntry[i])
-                except:
-                    print("error with data type entered")
-                    # Dont pass data somehow
-            elif 2 < i < 4:
-                try:
-                    self.listOfDataFromEntry[i] = float(self.listOfDataFromEntry[i])
-                    print(self.listOfDataFromEntry[i])
-                except:
-                    print("error with data type entered")
-                    # Dont pass data somehow
+
+
 
 
 

@@ -1,7 +1,10 @@
+# importing libaries and code
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import numpy as np
 import pandas as pd
+from tkinter import *
+from GUI_class_code.py import UseageGUI
 
 
 # To get google to authenticate the api
@@ -13,15 +16,13 @@ gc = gspread.authorize(credemtials) #gc is now your google account, with the acc
 # on google sheets, also the method .sheetx is to specify which sheet, number.
 wks = gc.open('Test Data for github test')
 
+class GUI(UseageGUI):
+    def __init__(self):
+        
 
-sheet2 = wks.worksheet("Sheet2")
-print(sheet2.get_all_values())
-sheet2Dataframe = pd.DataFrame(sheet2.get_all_values())
-print(sheet2Dataframe)
-listOfValuesToAdd = sheet2.range("A3:F3")
-print(listOfValuesToAdd)
-for i in listOfValuesToAdd:
-    i.value = 200
-sheet2.update_cells(listOfValuesToAdd)
-sheet2Dataframe = pd.DataFrame(sheet2.get_all_values())
-print(sheet2Dataframe)
+
+
+root = Tk()
+root.geometry("600x250")
+GUI(root)
+root.mainloop()
