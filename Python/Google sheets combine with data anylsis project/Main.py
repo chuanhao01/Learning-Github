@@ -4,7 +4,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 import numpy as np
 import pandas as pd
 from tkinter import *
-from GUI_class_code.py import UseageGUI
+from GUI_class_code import UseageGUI
 
 
 # To get google to authenticate the api
@@ -17,12 +17,14 @@ gc = gspread.authorize(credemtials) #gc is now your google account, with the acc
 wks = gc.open('Test Data for github test')
 
 class GUI(UseageGUI):
-    def __init__(self):
-        
+    pass
 
 
+def hello():
+    print("Hi")
 
 root = Tk()
 root.geometry("600x250")
-GUI(root)
+a = GUI(root)
+a.updateButton.config(command =lambda :hello())
 root.mainloop()
