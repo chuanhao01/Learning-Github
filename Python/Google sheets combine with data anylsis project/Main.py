@@ -18,16 +18,19 @@ wks = gc.open('Test Data for github test')
 
 # Class for worksheet interacting with G.sheets
 class worksheetData:
-    def __init__(self):
+    def __init__(self,wks):
+        self.wks = wks
+        self.worksheet = self.wks.worksheet("Sheet1")
         self.rowChooser = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
 
     # get data from google sheets, save in self.data as pandas dataframe
     def getDatafromGsheets(self):
-        self.data = pd.DataFrame(wks.worksheet("Sheet1").get_all_values())
+        self.data = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_values())
+        return self.data
 
 
-    # get row and column for Gsheets, return in google sheets format
+    # get row and column for Gsheets, return next row in google sheets format
     def getGFormatNextRowandColumn(self):
         self.getDatafromGsheets()
         tempListOfRandC = [] # This is to save the R and C in a list so we can change the value ltr, rather than the data be in a tuple
@@ -42,6 +45,19 @@ class worksheetData:
         listToReturn.append("A"+str(tempListOfRandC[0]))
         listToReturn.append(self.rowChooser[tempListOfRandC[1]] + str(tempListOfRandC[0]))
         return listToReturn
+
+    # This method is called when the update button is pushed from the GUI
+    def updateGSheetsWithData(self, updateData):
+        listOfNextRandC = []
+        listOfNextRandC = self.getGFormatNextRowandColumn()
+        # the slice string to get GObject for next Row
+        stringOfNextRandC = listOfNextRandC[0] + ":" + listOfNextRandC[1]
+        self.nextRowGObject = self.worksheet.range(stringOfNextRandC)
+        for i in range(len(self.nextRowGObject)):
+            self.nextRowGObject[i].value = updateData[i]
+        self.worksheet.update_cells(self.nextRowGObject)
+
+
 
 
 
@@ -61,5 +77,6 @@ class GUI(UseageGUI):
 a = pd.DataFrame(wks.worksheet("Sheet1").get_all_values())
 print(a)
 print(a.shape)
-b = worksheetData()
-b.getGFormatNextRowandColumn()
+b = worksheetData(wks)
+b.updateGSheetsWithData([1,1,1,1,1])
+print(b.getDatafromGsheets())
