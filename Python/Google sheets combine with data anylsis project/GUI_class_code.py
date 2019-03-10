@@ -85,7 +85,7 @@ class UseageGUI(Frame):
 
 
 # Main code
-root = Tk()
-root.geometry("600x250")
-UseageGUI(root)
-root.mainloop()
+# root = Tk()
+# root.geometry("600x250")
+# UseageGUI(root)
+# root.mainloop()

@@ -17,14 +17,15 @@ gc = gspread.authorize(credemtials) #gc is now your google account, with the acc
 wks = gc.open('Test Data for github test')
 
 class GUI(UseageGUI):
-    pass
+    def __init__(self, master=None):
+        UseageGUI.__init__(self, master)
+        self.updateButton.config(command= lambda :self.callme())
 
+    def callme(self):
+        print("Hi")
 
-def hello():
-    print("Hi")
 
 root = Tk()
 root.geometry("600x250")
 a = GUI(root)
-a.updateButton.config(command =lambda :hello())
 root.mainloop()
