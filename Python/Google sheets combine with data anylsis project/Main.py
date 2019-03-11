@@ -64,10 +64,23 @@ class worksheetData:
 class GUI(UseageGUI):
     def __init__(self, master=None):
         UseageGUI.__init__(self, master)
-        self.updateButton.config(command= lambda :self.callme())
+        self.updateButton.config(command= lambda :self.getData())
 
-    def callme(self):
-        print("Hi")
+    # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
+    def getData(self):
+        self.listofdata = []
+        self.listofdata.append(self.dateEntry.get())
+        self.listofdata.append(self.monthEntry.get())
+        self.listofdata.append(self.yearEntry.get())
+        self.listofdata.append(self.amountEntry.get())
+        self.listofdata.append(self.categoryEntry.get())
+        print(self.listofdata)
+        self.checkData()
+
+    # Method to check if the data var type is correct, then calling another method to format the data if the data is correct
+    def checkData(self):
+        for i in range(5):
+
 
 
 # root = Tk()
@@ -77,6 +90,3 @@ class GUI(UseageGUI):
 a = pd.DataFrame(wks.worksheet("Sheet1").get_all_values())
 print(a)
 print(a.shape)
-b = worksheetData(wks)
-b.updateGSheetsWithData([1,1,1,1,1])
-print(b.getDatafromGsheets())
