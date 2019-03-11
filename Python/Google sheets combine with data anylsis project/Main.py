@@ -48,6 +48,7 @@ class worksheetData:
 
     # This method is called when the update button is pushed from the GUI
     def updateGSheetsWithData(self, updateData):
+        print(self.getDatafromGsheets())
         listOfNextRandC = []
         listOfNextRandC = self.getGFormatNextRowandColumn()
         # the slice string to get GObject for next Row
@@ -61,9 +62,10 @@ class worksheetData:
 
 
 
-class GUI(UseageGUI):
+class GUI(UseageGUI, worksheetData):
     def __init__(self, master=None):
         UseageGUI.__init__(self, master)
+        worksheetData.__init__(self,wks)
         self.updateButton.config(command= lambda :self.getData())
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
@@ -80,13 +82,23 @@ class GUI(UseageGUI):
     # Method to check if the data var type is correct, then calling another method to format the data if the data is correct
     def checkData(self):
         for i in range(5):
+            if i < 3:
+                try:
+                    self.listofdata[i] = int(self.listofdata[i])
+                except:
+                    return
+            elif 2<i<4:
+                try:
+                    self.listofdata[i] = float(self.listofdata[i])
+                except:
+                    return
+        worksheetData.updateGSheetsWithData(self,self.listofdata)
 
 
-
-# root = Tk()
-# root.geometry("600x250")
-# a = GUI(root)
-# root.mainloop()
+root = Tk()
+root.geometry("600x250")
+a = GUI(root)
+root.mainloop()
 a = pd.DataFrame(wks.worksheet("Sheet1").get_all_values())
 print(a)
 print(a.shape)
