@@ -87,7 +87,18 @@ class UseageGUIFramework(Frame):
         self.dataFrame.grid(row=4, column=0, columnspan=6, rowspan=5)
         self.dataText = Text(self.dataFrame)
         self.dataText.place(anchor="nw")
-        self.dataText.insert('1.0',self.data)
+        self.dataText.insert("0.0", self.data)
+        # Hi
+        self.getDataFrame = Frame(self, height=40, width=100)
+        self.getDataFrame.grid(row=9, column=0)
+        self.getDataButton = Button(self.getDataFrame, text="Get Data")
+        self.getDataButton.place(anchor="nw")
+        self.getDataButton.config(command=lambda : self.boo1())
+
+    def boo1(self):
+        self.dataText.delete(1.0, END)
+
+
 
 # Main code
 root = Tk()

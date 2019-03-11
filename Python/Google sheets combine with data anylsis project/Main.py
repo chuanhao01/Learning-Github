@@ -38,8 +38,9 @@ class worksheetData:
 
     # get dataframe with record
     def getDataInRecord(self):
-        return pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
-
+        rtrString = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
+        rtrString = str(rtrString)
+        return rtrString
     # get row and column for Gsheets, return next row in google sheets format
     def getGFormatNextRowandColumn(self):
         self.getDatafromGsheets()
@@ -58,7 +59,7 @@ class worksheetData:
 
     # This method is called when the update button is pushed from the GUI
     def updateGSheetsWithData(self, updateData):
-        print(self.getDatafromGsheets())
+        # print(self.getDatafromGsheets())
         listOfNextRandC = []
         listOfNextRandC = self.getGFormatNextRowandColumn()
         # the slice string to get GObject for next Row
@@ -77,12 +78,12 @@ class GUI(UseageGUIFramework, worksheetData):
         UseageGUIFramework.__init__(self, master)
         worksheetData.__init__(self)
         # Assigning the update button to a method call
-        self.updateButton.config(command= lambda :self.getData())
+        self.updateButton.config(command= lambda :self.getDataFromEntry())
         # Assigning the get data button to a method call
-        self.getDataButton.config(command= lambda :self.)
+        self.getDataButton.config(command= lambda :self.getDataToShow())
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
-    def getData(self):
+    def getDataFromEntry(self):
         self.listofdata = []
         self.listofdata.append(self.dateEntry.get())
         self.listofdata.append(self.monthEntry.get())
@@ -110,6 +111,14 @@ class GUI(UseageGUIFramework, worksheetData):
         worksheetData.updateGSheetsWithData(self,self.listofdata)
 
     # method called when get data button is pushed
+    def getDataToShow(self):
+        self.dataText.config(state=NORMAL)
+        self.dataText.delete(0.0, END)
+        dataToShow = worksheetData.getDataInRecord(self)
+        self.dataText.insert(0.0, dataToShow)
+        self.dataText.config(state=DISABLED)
+
+
 
 root = Tk()
 root.geometry("601x550")
