@@ -4,7 +4,7 @@
 
 from tkinter import *
 # Class declaration
-class UseageGUI(Frame):
+class UseageGUIFramework(Frame):
     def __init__(self, master = None):
         Frame.__init__(self, master)
         self.master = master
@@ -74,8 +74,21 @@ class UseageGUI(Frame):
         self.updateButton = Button(self.updateButtonFrame, text="Update")
         self.updateButton.config(width=20, height=2)
         self.updateButton.place(anchor="center", x=150, y=20)
-
-
+        # Label for Data label
+        self.datalabelLabelframe = LabelFrame(self, height=40, width=100)
+        self.datalabelLabelframe.grid(row=3, column=0)
+        self.datalabelLabel = Label(self.datalabelLabelframe, text="Data")
+        self.datalabelLabel.place(anchor="center", x=50, y=18)
+        # Text to place data in
+        self.dataFrame = Frame(self, height=240, width=600)
+        self.dataFrame.grid(row=4, column=0, columnspan=6, rowspan=5)
+        self.dataText = Text(self.dataFrame)
+        self.dataText.place(anchor="nw")
+        # Button to call for data
+        self.getDataFrame = Frame(self, height=40, width=100)
+        self.getDataFrame.grid(row=9, column=0)
+        self.getDataButton = Button(self.getDataFrame, text="Get Data")
+        self.getDataButton.place(anchor="nw")
 
 
 
@@ -86,6 +99,6 @@ class UseageGUI(Frame):
 
 # Main code
 # root = Tk()
-# root.geometry("600x250")
-# UseageGUI(root)
+# root.geometry("600x450")
+# UseageGUIFramework(root)
 # root.mainloop()

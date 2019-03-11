@@ -4,22 +4,29 @@ from oauth2client.service_account import ServiceAccountCredentials
 import numpy as np
 import pandas as pd
 from tkinter import *
-from Class_Code.GUI_class_code import UseageGUI
+from Class_Code.GUI_Framework_Code import UseageGUIFramework
 
-
+# Shifted to class in worksheetData
 # To get google to authenticate the api
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-credemtials = ServiceAccountCredentials.from_json_keyfile_name('Python Spreadsheet Project-5fc4b718993a.json', scope)
-gc = gspread.authorize(credemtials) #gc is now your google account, with the access to ur google sheets
+
+# scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+# credemtials = ServiceAccountCredentials.from_json_keyfile_name('Python Spreadsheet Project-5fc4b718993a.json', scope)
+# gc = gspread.authorize(credemtials) #gc is now your google account, with the access to ur google sheets
 
 # wks is now our worksheet object, note the first var passed has to be a string of the name of the spreadsheet
 # on google sheets, also the method .sheetx is to specify which sheet, number.
-wks = gc.open('Test Data for github test')
+
+# wks = gc.open('Test Data for github test')
+
+# Commenting out code
 
 # Class for worksheet interacting with G.sheets
 class worksheetData:
-    def __init__(self,wks):
-        self.wks = wks
+    def __init__(self):
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        credemtials = ServiceAccountCredentials.from_json_keyfile_name('Python Spreadsheet Project-5fc4b718993a.json',scope)
+        gc = gspread.authorize(credemtials)
+        self.wks = gc.open("Test Data for github test")
         self.worksheet = self.wks.worksheet("Sheet1")
         self.rowChooser = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 
@@ -29,6 +36,9 @@ class worksheetData:
         self.data = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_values())
         return self.data
 
+    # get dataframe with record
+    def getDataInRecord(self):
+        return pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
 
     # get row and column for Gsheets, return next row in google sheets format
     def getGFormatNextRowandColumn(self):
@@ -60,13 +70,16 @@ class worksheetData:
 
 
 
-
-
-class GUI(UseageGUI, worksheetData):
+# Class for GUI, with framework imported from another file
+class GUI(UseageGUIFramework, worksheetData):
     def __init__(self, master=None):
-        UseageGUI.__init__(self, master)
-        worksheetData.__init__(self,wks)
+        # To call on the classes such that we can access the class_attributes
+        UseageGUIFramework.__init__(self, master)
+        worksheetData.__init__(self)
+        # Assigning the update button to a method call
         self.updateButton.config(command= lambda :self.getData())
+        # Assigning the get data button to a method call
+        self.getDataButton.config(command= lambda :self.)
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
     def getData(self):
@@ -76,11 +89,13 @@ class GUI(UseageGUI, worksheetData):
         self.listofdata.append(self.yearEntry.get())
         self.listofdata.append(self.amountEntry.get())
         self.listofdata.append(self.categoryEntry.get())
-        print(self.listofdata)
+        # To check with console if the data is being sent through
+        # print(self.listofdata)
         self.checkData()
 
-    # Method to check if the data var type is correct, then calling another method to format the data if the data is correct
+    # Method to check if the data var type is correct, pushing the data onto the GSheets
     def checkData(self):
+        # based on the data position in the list, change the string value in the list to its correct type
         for i in range(5):
             if i < 3:
                 try:
@@ -94,11 +109,10 @@ class GUI(UseageGUI, worksheetData):
                     return
         worksheetData.updateGSheetsWithData(self,self.listofdata)
 
+    # method called when get data button is pushed
 
 root = Tk()
-root.geometry("600x250")
-a = GUI(root)
+root.geometry("601x550")
+GUI(root)
 root.mainloop()
-a = pd.DataFrame(wks.worksheet("Sheet1").get_all_values())
-print(a)
-print(a.shape)
+
