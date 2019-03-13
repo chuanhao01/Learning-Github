@@ -29,7 +29,7 @@ class worksheetData:
         self.wks = gc.open("Test Data for github test")
         self.worksheet = self.wks.worksheet("Sheet1")
         self.rowChooser = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
-
+        self.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     # get data from google sheets, save in self.data as pandas dataframe
     def getDatafromGsheets(self):
@@ -60,7 +60,19 @@ class worksheetData:
         return str(self.totalAmountspent)
 
     # get spent by month.
-    # def
+    def getMoneySpentByMonth(self):
+        self.getDatafromGsheetsInRecord()
+        dataFrameForAmountSpentBYMonth = pd.DataFrame(index=self.Months,columns=["Total Amount"])
+        # use booleanindexing to get data only from the months
+        for i in range(1,13):
+            # gets the sum of amount spent in i month
+            amountSpentPerMonth = 0
+            amountSpentPerMonth = self.dataRecord.loc[self.dataRecord.loc[:, "Month"] == i, "Amount"].sum()
+            # Places the sum to the index of the month in the dataframe
+            dataFrameForAmountSpentBYMonth.loc[self.Months[i-1],"Total Amount"] = amountSpentPerMonth
+        # Returns the dataframe as a string
+        return str(dataFrameForAmountSpentBYMonth)
+
 
     # get row and column for Gsheets, return next row in google sheets format
     def getGFormatNextRowandColumn(self):
@@ -144,7 +156,7 @@ class GUI(UseageGUIFramework, worksheetData):
         elif indexOfBox == 1:
             dataToShow = "Total Amount Spent\n" + worksheetData.getTotalAmountSpent(self)
         elif indexOfBox == 2:
-            pass
+            dataToShow = worksheetData.getMoneySpentByMonth(self)
         elif indexOfBox == 3:
             pass
         self.dataText.insert(0.0, dataToShow)
