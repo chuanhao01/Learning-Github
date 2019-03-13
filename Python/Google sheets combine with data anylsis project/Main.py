@@ -133,18 +133,24 @@ class GUI(UseageGUIFramework, worksheetData):
     # Method to check if the data var type is correct, pushing the data onto the GSheets
     def checkData(self):
         # based on the data position in the list, change the string value in the list to its correct type
+        if len(self.listofdata) < 5:
+            self.getDataToShow("missingParameters")
+            return
         for i in range(5):
             if i < 3:
                 try:
                     self.listofdata[i] = int(self.listofdata[i])
                 except:
+                    self.getDataToShow("error type 1")
                     return
             elif 2<i<4:
                 try:
                     self.listofdata[i] = float(self.listofdata[i])
                 except:
+                    self.getDataToShow("error type 2")
                     return
         worksheetData.updateGSheetsWithData(self,self.listofdata)
+
 
     # method called when get data button is pushed
     def getDataToShow(self, indexOfBox):
@@ -159,13 +165,19 @@ class GUI(UseageGUIFramework, worksheetData):
             dataToShow = worksheetData.getMoneySpentByMonth(self)
         elif indexOfBox == 3:
             pass
+        elif indexOfBox == "missingParameters":
+            dataToShow = "Some values from the entry boxes are missing!"
+        elif indexOfBox == "error type 1":
+            dataToShow = "The values in the data, month, year are not all intergers or floats"
+        elif indexOfBox == "error type 2":
+            dataToShow = "The value for amount spent is not a number"
         self.dataText.insert(0.0, dataToShow)
         self.dataText.config(state=DISABLED)
 
 
 
 root = Tk()
-root.geometry("601x550")
+root.geometry("603x550")
 GUI(root)
 root.mainloop()
 
