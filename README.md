@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Personal Finance Tracker</title>
-</head>
-<body>
-    This is
-</body>
-</html>
+# Personal Finacnce Tracker
+## Table of Content
+1. Description
+2. Useage
+3. Wiki/Doccumentation
