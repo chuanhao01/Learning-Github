@@ -28,7 +28,9 @@ class worksheetData:
         gc = gspread.authorize(credemtials)
         self.wks = gc.open("Test Data for github test")
         self.worksheet = self.wks.worksheet("Sheet1")
+        # used in formating pandas index and columns into GSheets index and cloumn
         self.rowChooser = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+        # Used to get in method for amount spent per month
         self.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
     # get data from google sheets, save in self.data as pandas dataframe
@@ -110,13 +112,11 @@ class GUI(UseageGUIFramework, worksheetData):
         # To call on the classes such that we can access the class_attributes
         UseageGUIFramework.__init__(self, master)
         worksheetData.__init__(self)
-        # Assigning the update button to a method call
-        self.updateButton.config(command= lambda :self.getDataFromEntry())
         # Assigning the buttons to the methods
+        self.updateButton.config(command= lambda :self.getDataFromEntry())
         self.getDataButton.config(command= lambda :self.getDataToShow(0))
         self.totalSpentButton.config(command=lambda :self.getDataToShow(1))
         self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow(2))
-        self.totalSpentByCategoryButton.config(command=lambda :self.getDataToShow(3))
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
     def getDataFromEntry(self):
@@ -130,29 +130,34 @@ class GUI(UseageGUIFramework, worksheetData):
         # print(self.listofdata)
         self.checkData()
 
-    # Method to check if the data var type is correct, pushing the data onto the GSheets
+    # Method to check if the data var type is correct, pushing the data onto the GSheets, also handles catching exceptions
     def checkData(self):
-        # based on the data position in the list, change the string value in the list to its correct type
+        # To catch the exception where not all the entry fields are filled in
         if len(self.listofdata) < 5:
             self.getDataToShow("missingParameters")
             return
+        # based on the data position in the list, change the string value in the list to its correct type
         for i in range(5):
             if i < 3:
                 try:
                     self.listofdata[i] = int(self.listofdata[i])
                 except:
+                    # To catch the exception if the Date, Month and year are not numbers
                     self.getDataToShow("error type 1")
                     return
             elif 2<i<4:
                 try:
                     self.listofdata[i] = float(self.listofdata[i])
                 except:
+                    # To catch the exception where the amount is not a number
                     self.getDataToShow("error type 2")
                     return
+        # Pushing data if its correct onto GSheets
         worksheetData.updateGSheetsWithData(self,self.listofdata)
 
 
     # method called when get data button is pushed
+    # method is also used to catch exceptions in updating data
     def getDataToShow(self, indexOfBox):
         self.dataText.config(state=NORMAL)
         self.dataText.delete(0.0, END)
@@ -163,12 +168,10 @@ class GUI(UseageGUIFramework, worksheetData):
             dataToShow = "Total Amount Spent\n" + worksheetData.getTotalAmountSpent(self)
         elif indexOfBox == 2:
             dataToShow = worksheetData.getMoneySpentByMonth(self)
-        elif indexOfBox == 3:
-            pass
         elif indexOfBox == "missingParameters":
             dataToShow = "Some values from the entry boxes are missing!"
         elif indexOfBox == "error type 1":
-            dataToShow = "The values in the data, month, year are not all intergers or floats"
+            dataToShow = "The values in the data, month, year are not all numbers"
         elif indexOfBox == "error type 2":
             dataToShow = "The value for amount spent is not a number"
         self.dataText.insert(0.0, dataToShow)

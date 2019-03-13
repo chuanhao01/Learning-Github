@@ -112,15 +112,8 @@ class UseageGUIFramework(Frame):
         self.totalSpentByMonthButton = Button(self.totalSpentByMonthFrame, text="Total Spent\nBy Month")
         self.totalSpentByMonthButton.grid(row=0, column=0)
         self.totalSpentByMonthButton.grid(sticky="nsew")
-        # Button to get total spent in category
-        self.totalSpentByCategoryFrame = Frame(self, height=40, width=100)
-        self.totalSpentByCategoryFrame.grid(row=9, column=3)
-        self.totalSpentByCategoryFrame.grid_propagate(False)
-        self.totalSpentByCategoryFrame.rowconfigure(0, weight=1)
-        self.totalSpentByCategoryFrame.columnconfigure(0, weight=1)
-        self.totalSpentByCategoryButton = Button(self.totalSpentByCategoryFrame, text = "Total Spent By\nCategory")
-        self.totalSpentByCategoryButton.grid(row=0, column=0)
-        self.totalSpentByCategoryButton.grid(sticky="nesw")
+
+
 
 
 
