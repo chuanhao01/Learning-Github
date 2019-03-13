@@ -36,11 +36,32 @@ class worksheetData:
         self.data = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_values())
         return self.data
 
-    # get dataframe with record
-    def getDataInRecord(self):
+    # get dataframe with record, save to self.dataRecord, and return the dataframe
+    def getDatafromGsheetsInRecord(self):
+        self.dataRecord = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
+        return self.dataRecord
+
+    # get dataframe with record, return string
+    def getDataInRecordString(self):
         rtrString = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
         rtrString = str(rtrString)
         return rtrString
+
+    # get total spent and return as a series, series is set to self.amountSpentSeries
+    def getAmountSpentSeries(self):
+        self.getDatafromGsheetsInRecord()
+        self.amountSpentSeries = self.dataRecord.loc[:, "Amount"]
+        return self.amountSpentSeries
+
+    # get total amount spent and return as string
+    def getTotalAmountSpent(self):
+        self.getAmountSpentSeries()
+        self.totalAmountspent = self.amountSpentSeries.sum()
+        return str(self.totalAmountspent)
+
+    # get spent by month.
+    # def
+
     # get row and column for Gsheets, return next row in google sheets format
     def getGFormatNextRowandColumn(self):
         self.getDatafromGsheets()
@@ -79,8 +100,11 @@ class GUI(UseageGUIFramework, worksheetData):
         worksheetData.__init__(self)
         # Assigning the update button to a method call
         self.updateButton.config(command= lambda :self.getDataFromEntry())
-        # Assigning the get data button to a method call
-        self.getDataButton.config(command= lambda :self.getDataToShow())
+        # Assigning the buttons to the methods
+        self.getDataButton.config(command= lambda :self.getDataToShow(0))
+        self.totalSpentButton.config(command=lambda :self.getDataToShow(1))
+        self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow(2))
+        self.totalSpentByCategoryButton.config(command=lambda :self.getDataToShow(3))
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
     def getDataFromEntry(self):
@@ -111,10 +135,18 @@ class GUI(UseageGUIFramework, worksheetData):
         worksheetData.updateGSheetsWithData(self,self.listofdata)
 
     # method called when get data button is pushed
-    def getDataToShow(self):
+    def getDataToShow(self, indexOfBox):
         self.dataText.config(state=NORMAL)
         self.dataText.delete(0.0, END)
-        dataToShow = worksheetData.getDataInRecord(self)
+        dataToShow = ""
+        if indexOfBox == 0:
+            dataToShow = worksheetData.getDataInRecordString(self)
+        elif indexOfBox == 1:
+            dataToShow = "Total Amount Spent\n" + worksheetData.getTotalAmountSpent(self)
+        elif indexOfBox == 2:
+            pass
+        elif indexOfBox == 3:
+            pass
         self.dataText.insert(0.0, dataToShow)
         self.dataText.config(state=DISABLED)
 
