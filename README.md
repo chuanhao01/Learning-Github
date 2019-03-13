@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Personal Finance Tracker</title>
 </head>
 <body>
-
+    This is
 </body>
 </html>
