@@ -8,7 +8,7 @@ class UseageGUIFramework(Frame):
     def __init__(self, master = None):
         Frame.__init__(self, master)
         self.master = master
-        self.master.title("Cool")
+        self.master.title("GUI For Personal Finance Tracker")
         self.pack(fill=BOTH, expand=1)
         self.getFrameworkOfWidgets()
 
@@ -88,9 +88,39 @@ class UseageGUIFramework(Frame):
         # Button to call for data
         self.getDataFrame = Frame(self, height=40, width=100)
         self.getDataFrame.grid(row=9, column=0)
+        self.getDataFrame.grid_propagate(False)
+        self.getDataFrame.rowconfigure(0, weight=1)
+        self.getDataFrame.columnconfigure(0, weight=1)
         self.getDataButton = Button(self.getDataFrame, text="Get Data")
-        self.getDataButton.place(anchor="nw")
-
+        self.getDataButton.grid(row=0, column=0)
+        self.getDataButton.grid(sticky="nsew")
+        # Button to get total money spent
+        self.totalSpentFrame = Frame(self, height=40, width=100)
+        self.totalSpentFrame.grid(row=9, column=1)
+        self.totalSpentFrame.grid_propagate(False)
+        self.totalSpentFrame.rowconfigure(0, weight=1)
+        self.totalSpentFrame.columnconfigure(0, weight=1)
+        self.totalSpentButton = Button(self.totalSpentFrame, text="Total Spent")
+        self.totalSpentButton.grid(row=0, column=0)
+        self.totalSpentButton.grid(sticky="nsew")
+        # Button to get total spent by month
+        self.totalSpentByMonthFrame = Frame(self, height=40, width=100)
+        self.totalSpentByMonthFrame.grid(row=9, column=2)
+        self.totalSpentByMonthFrame.grid_propagate(False)
+        self.totalSpentByMonthFrame.rowconfigure(0, weight=1)
+        self.totalSpentByMonthFrame.columnconfigure(0, weight=1)
+        self.totalSpentByMonthButton = Button(self.totalSpentByMonthFrame, text="Total Spent\nBy Month")
+        self.totalSpentByMonthButton.grid(row=0, column=0)
+        self.totalSpentByMonthButton.grid(sticky="nsew")
+        # Button to get total spent in category
+        self.totalSpentByCategoryFrame = Frame(self, height=40, width=100)
+        self.totalSpentByCategoryFrame.grid(row=9, column=3)
+        self.totalSpentByCategoryFrame.grid_propagate(False)
+        self.totalSpentByCategoryFrame.rowconfigure(0, weight=1)
+        self.totalSpentByCategoryFrame.columnconfigure(0, weight=1)
+        self.totalSpentByCategoryButton = Button(self.totalSpentByCategoryFrame, text = "Total Spent By\nCategory")
+        self.totalSpentByCategoryButton.grid(row=0, column=0)
+        self.totalSpentByCategoryButton.grid(sticky="nesw")
 
 
 
