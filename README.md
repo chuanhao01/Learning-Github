@@ -3,9 +3,11 @@
 ## Getting Started
 So far, this program is a personal project, and the set up to change the gauth to other accounts has not been made yet. The guide may be up at a later date. 
 
-## Installing
+### Prerequisites
 This program requires the python libraries, tkinter, pandas, numpy, gspread and oauth2client.
 This program also requires the set-up of a google drive and sheet api on google developer's console.
+
+### Installing
 To intsall the libraries if they are not already installed, we can use python in-built pip library
 ```
 pip install scipy
