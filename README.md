@@ -2,11 +2,7 @@
 
 ## Description
 This is a personal finace tracker I made using python and Google Drive and Sheet API. Tkinter was used to create a Graphical User Interface(GUI) to make taking user inputs and displaying information easier. Pandas was used to analyse the data taken from Google Sheets easier. 
-
-## Usage
-
-### User Input
-This program when run, is able to take daily transactions through the GUI, and push the data to the Google Sheets. This data from the user is checked to catch exceptions and will not push data that is of invalid type. For example, the amount can only be a number and not a string. 
+> Note: A more detailed doccumentation and description is on the wiki
 
 ## Getting Started
 So far, this program is a personal project, and the set up to change the gauth to other accounts has not been made yet. The guide may be up at a later date. 
