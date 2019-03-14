@@ -31,7 +31,7 @@ class UseageGUIFramework(Frame):
         # Amount
         self.amountLabelframe = LabelFrame(self, height=40, width=100)
         self.amountLabelframe.grid(row=0, column=4)
-        self.amountLabel = Label(self.amountLabelframe, text="Amount")
+        self.amountLabel = Label(self.amountLabelframe, text="Amount\nSpent")
         self.amountLabel.place(anchor="center", x=50, y=18)
         # Category
         self.categoryLabelframe = LabelFrame(self, height=40, width=100)
