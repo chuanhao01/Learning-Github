@@ -1,8 +1,8 @@
 # Personal Finance Tracker
 
 ## Description
-This is a personal finace tracker I made using python and Google's APIs. Tkinter was used to create a Graphical User Interface(GUI) to make taking user inputs and displaying information easier. Pandas was used to analyse the data taken from Google Sheets easier. 
-> Note: A more detailed doccumentation and description is on the wiki
+This is a personal finance tracker I made using python and Google's APIs. The program creates a Tkinter window where you can input your daily transactions into the program and it will be saved on Google Sheets. The window also allows the user to retrieve data from the Google Sheet, analyse the data and then present the data to the user. 
+> Note: A more detailed documentation and description is on the wiki
 
 ## Getting Started
 So far, this program is a personal project, and the set up to change the gauth to other accounts has not been made yet. The guide may be up at a later date. 
