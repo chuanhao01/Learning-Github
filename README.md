@@ -1,7 +1,7 @@
-# Personal Finacnce Tracker
+# Personal Finance Tracker
 
 ## Description
-This is a personal finace tracker I made using python and Google Drive and Sheet API. Tkinter was used to create a Graphical User Interface(GUI) to make taking user inputs and displaying information easier. Pandas was used to analyse the data taken from Google Sheets easier. 
+This is a personal finace tracker I made using python and Google's APIs. Tkinter was used to create a Graphical User Interface(GUI) to make taking user inputs and displaying information easier. Pandas was used to analyse the data taken from Google Sheets easier. 
 > Note: A more detailed doccumentation and description is on the wiki
 
 ## Getting Started
