@@ -103,6 +103,9 @@ class GUI(UseageGUIFramework, worksheetData):
         self.getDataButton.config(command= lambda :self.getDataToShow(0))
         self.totalSpentButton.config(command=lambda :self.getDataToShow(1))
         self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow(2))
+        # Assigning list for combobox
+        self.categoryList = ["Food", "Shopping", "Transport", "Home", "Savings", "Healthcare", "Education", "Groceries", "Work", "Others"]
+        self.categoryComboBox.config(values=self.categoryList)
 
     # Method to get data in the Entry of the GUI, and place the data in a list, then calling another method to check
     def getDataFromEntry(self):
@@ -111,7 +114,7 @@ class GUI(UseageGUIFramework, worksheetData):
         self.listofdata.append(self.monthEntry.get())
         self.listofdata.append(self.yearEntry.get())
         self.listofdata.append(self.amountEntry.get())
-        self.listofdata.append(self.categoryEntry.get())
+        self.listofdata.append(self.categoryComboBox.get())
         # To check with console if the data is being sent through
         # print(self.listofdata)
         self.checkData()
