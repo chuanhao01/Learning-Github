@@ -165,8 +165,8 @@ class GUI(UseageGUIFramework, worksheetData):
 
 
 
-# root = Tk()
-# root.geometry("603x550")
-# GUI(root)
-# root.mainloop()
+root = Tk()
+root.geometry("603x550")
+GUI(root)
+root.mainloop()
 

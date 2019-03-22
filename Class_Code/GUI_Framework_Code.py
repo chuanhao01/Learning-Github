@@ -3,6 +3,7 @@
 # 2. Use functions to make the framework of everthing more efficient
 
 from tkinter import *
+from tkinter import ttk
 # Class declaration
 class UseageGUIFramework(Frame):
     def __init__(self, master = None):
@@ -63,11 +64,15 @@ class UseageGUIFramework(Frame):
         self.amountEntryFrame.grid(row=1, column=4)
         self.amountEntry = Entry(self.amountEntryFrame)
         self.amountEntry.place(x=0, y=0)
-        # Category Entry
-        self.categoryEntryFrame = Frame(self, width=100, height=40)
-        self.categoryEntryFrame.grid(row=1, column=5)
-        self.categoryEntry = Entry(self.categoryEntryFrame)
-        self.categoryEntry.place(x=0, y=0)
+        # Category ComboBox
+        self.categoryComboBoxFrame = Frame(self, width=100, height=40)
+        self.categoryComboBoxFrame.grid(row=1, column=5)
+        self.categoryComboBoxFrame.grid_propagate(False)
+        self.categoryComboBoxFrame.rowconfigure(0, weight=1)
+        self.categoryComboBoxFrame.columnconfigure(0, weight=1)
+        self.categoryComboBox = ttk.Combobox(self.categoryComboBoxFrame)
+        self.categoryComboBox.grid(row=0, column=0)
+        self.categoryComboBox.grid(sticky="nsew")
         # Update
         self.updateButtonFrame = Frame(self, width=300, height=40)
         self.updateButtonFrame.grid(row=2, column=1, columnspan=3)

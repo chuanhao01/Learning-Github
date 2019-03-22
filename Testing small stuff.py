@@ -3,6 +3,7 @@
 # 2. Use functions to make the framework of everthing more efficient
 
 from tkinter import *
+from tkinter import ttk
 # Class declaration
 class UseageGUIFramework(Frame):
     def __init__(self, master = None):
@@ -64,17 +65,14 @@ class UseageGUIFramework(Frame):
         self.amountEntry = Entry(self.amountEntryFrame)
         self.amountEntry.place(x=0, y=0)
         # Category OptionMenu
-        self.categoryOptionMenuFrame = Frame(self, width=100, height=40)
-        self.categoryOptionMenuFrame.grid(row=1, column=5)
-        self.categoryOptionMenuFrame.grid_propagate(False)
-        self.categoryOptionMenuFrame.rowconfigure(0, weight=1)
-        self.categoryOptionMenuFrame.columnconfigure(0, weight=1)
-        self.var = StringVar()
-        self.var.set(" ")
-        self.chocies = {"hello", "hi"}
-        self.categoryOptionMenu = OptionMenu(self.categoryOptionMenuFrame, self.var, 'Hello', "Hi")
-        self.categoryOptionMenu.grid(row=0, column=0)
-        self.categoryOptionMenu.grid(sticky="nsew")
+        self.categoryComboBoxFrame = Frame(self, width=100, height=40)
+        self.categoryComboBoxFrame.grid(row=1, column=5)
+        self.categoryComboBoxFrame.grid_propagate(False)
+        self.categoryComboBoxFrame.rowconfigure(0, weight=1)
+        self.categoryComboBoxFrame.columnconfigure(0, weight=1)
+        self.categoryComboBox = ttk.Combobox(self.categoryComboBoxFrame)
+        self.categoryComboBox.grid(row=0, column=0)
+        self.categoryComboBox.grid(sticky="nsew")
         # self.categoryEntryFrame = Frame(self, width=100, height=40)
         # self.categoryEntryFrame.grid(row=1, column=5)
         # self.categoryEntry = Entry(self.categoryEntryFrame)
@@ -83,7 +81,7 @@ class UseageGUIFramework(Frame):
         self.updateButtonFrame = Frame(self, width=300, height=40)
         self.updateButtonFrame.grid(row=2, column=1, columnspan=3)
         self.updateButton = Button(self.updateButtonFrame, text="Update")
-        self.updateButton.config(width=20, height=2)
+        self.updateButton.config(width=20, height=2, command=lambda :self.HELLO())
         self.updateButton.place(anchor="center", x=150, y=20)
         # Label for Data label
         self.datalabelLabelframe = LabelFrame(self, height=40, width=100)
@@ -124,10 +122,18 @@ class UseageGUIFramework(Frame):
         self.totalSpentByMonthButton.grid(row=0, column=0)
         self.totalSpentByMonthButton.grid(sticky="nsew")
         # Button to get bar graph for cat
+        self.testframe = Frame(self, height=40, width=100)
+        self.testframe.grid(row=9, column=4)
+        self.testframe.grid_propagate(False)
+        self.testframe.rowconfigure(0, weight=1)
+        self.testframe.columnconfigure(0, weight=1)
+        self.testcombobox = ttk.Combobox(self.testframe)
+        self.testcombobox.config(values=["Hello"])
+        self.testcombobox.grid(row=0, column=0)
+        self.testcombobox.grid(sticky="nsew")
 
-
-
-
+    def HELLO(self):
+        print(self.testcombobox.get())
 
 
 
