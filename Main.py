@@ -29,6 +29,11 @@ class worksheetData:
         self.dataRecord = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
         return self.dataRecord
 
+    def getSortDataInRecord(self):
+        self.getDatafromGsheetsInRecord()
+        rtrString = str(self.dataRecord.sort_values(by=["Month", "Date of expenditure"]))
+        return rtrString
+
     # get dataframe with record, return string
     def getDataInRecordString(self):
         rtrString = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
