@@ -112,6 +112,7 @@ class UseageGUIFramework(Frame):
         self.totalSpentByMonthButton = Button(self.totalSpentByMonthFrame, text="Total Spent\nBy Month")
         self.totalSpentByMonthButton.grid(row=0, column=0)
         self.totalSpentByMonthButton.grid(sticky="nsew")
+        # Button to get bar graph for cat
 
 
 
