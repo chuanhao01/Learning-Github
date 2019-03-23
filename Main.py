@@ -29,15 +29,16 @@ class worksheetData:
         self.dataRecord = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
         return self.dataRecord
 
-    def getSortDataInRecord(self):
+    # get dataframe with record, sort by month then date, return string of sorted data
+    def getSortedDataInRecordString(self):
         self.getDatafromGsheetsInRecord()
         rtrString = str(self.dataRecord.sort_values(by=["Month", "Date of expenditure"]))
         return rtrString
 
     # get dataframe with record, return string
     def getDataInRecordString(self):
-        rtrString = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
-        rtrString = str(rtrString)
+        self.getDatafromGsheetsInRecord()
+        rtrString = str(self.dataRecord)
         return rtrString
 
     # get total spent and return as a series, series is set to self.amountSpentSeries
@@ -105,9 +106,10 @@ class GUI(UseageGUIFramework, worksheetData):
         worksheetData.__init__(self)
         # Assigning the buttons to the methods
         self.updateButton.config(command= lambda :self.getDataFromEntry())
-        self.getDataButton.config(command= lambda :self.getDataToShow(0))
-        self.totalSpentButton.config(command=lambda :self.getDataToShow(1))
-        self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow(2))
+        self.getDataButton.config(command= lambda :self.getDataToShow("Get Data"))
+        self.totalSpentButton.config(command=lambda :self.getDataToShow("Total Spent"))
+        self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow("Total Spent\nBy Month"))
+        self.getSortedDataButton.config(command=lambda :self.getDataToShow("Get Sorted Data"))
         # Assigning list for combobox
         self.categoryList = ["Food", "Shopping", "Transport", "Home", "Savings", "Healthcare", "Education", "Groceries", "Work", "Others"]
         self.categoryComboBox.config(values=self.categoryList)
@@ -156,12 +158,14 @@ class GUI(UseageGUIFramework, worksheetData):
         self.dataText.config(state=NORMAL)
         self.dataText.delete(0.0, END)
         dataToShow = ""
-        if indexOfBox == 0:
+        if indexOfBox == "Get Data":
             dataToShow = worksheetData.getDataInRecordString(self)
-        elif indexOfBox == 1:
+        elif indexOfBox == "Total Spent":
             dataToShow = "Total Amount Spent\n" + worksheetData.getTotalAmountSpent(self)
-        elif indexOfBox == 2:
+        elif indexOfBox == "Total Spent\nBy Month":
             dataToShow = worksheetData.getMoneySpentByMonth(self)
+        elif indexOfBox == "Get Sorted Data":
+            dataToShow = worksheetData.getSortedDataInRecordString(self)
         elif indexOfBox == "missingParameters":
             dataToShow = "Some values from the entry boxes are missing!"
         elif indexOfBox == "error type 1":

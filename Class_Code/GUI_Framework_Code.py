@@ -115,9 +115,18 @@ class UseageGUIFramework(Frame):
         self.getDataButton = Button(self.getDataFrame, text="Get Data")
         self.getDataButton.grid(row=0, column=0)
         self.getDataButton.grid(sticky="nsew")
+        # Button to get Sorted data by month and date
+        self.getSortedDataFrame = Frame(self, height=40, width=100)
+        self.getSortedDataFrame.grid(row=9, column=1)
+        self.getSortedDataFrame.grid_propagate(False)
+        self.getSortedDataFrame.rowconfigure(0, weight=1)
+        self.getSortedDataFrame.columnconfigure(0, weight=1)
+        self.getSortedDataButton = Button(self.getSortedDataFrame, text="Get Sorted Data")
+        self.getSortedDataButton.grid(row=0, column=0)
+        self.getSortedDataButton.grid(sticky="nsew")
         # Button to get total money spent
         self.totalSpentFrame = Frame(self, height=40, width=100)
-        self.totalSpentFrame.grid(row=9, column=1)
+        self.totalSpentFrame.grid(row=10, column=0)
         self.totalSpentFrame.grid_propagate(False)
         self.totalSpentFrame.rowconfigure(0, weight=1)
         self.totalSpentFrame.columnconfigure(0, weight=1)
@@ -126,7 +135,7 @@ class UseageGUIFramework(Frame):
         self.totalSpentButton.grid(sticky="nsew")
         # Button to get total spent by month
         self.totalSpentByMonthFrame = Frame(self, height=40, width=100)
-        self.totalSpentByMonthFrame.grid(row=9, column=2)
+        self.totalSpentByMonthFrame.grid(row=10, column=1)
         self.totalSpentByMonthFrame.grid_propagate(False)
         self.totalSpentByMonthFrame.rowconfigure(0, weight=1)
         self.totalSpentByMonthFrame.columnconfigure(0, weight=1)
