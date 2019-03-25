@@ -31,14 +31,12 @@ class worksheetData:
 
     # get dataframe with record, sort by month then date, return string of sorted data
     def getSortedDataInRecordString(self):
-        self.getDatafromGsheetsInRecord()
-        rtrString = str(self.dataRecord.sort_values(by=["Month", "Date of expenditure"]))
+        rtrString = str(self.getDatafromGsheetsInRecord().sort_values(by=["Month", "Date of expenditure"]))
         return rtrString
 
     # get dataframe with record, return string
     def getDataInRecordString(self):
-        self.getDatafromGsheetsInRecord()
-        rtrString = str(self.dataRecord)
+        rtrString = str(self.getDatafromGsheetsInRecord())
         return rtrString
 
     # get total spent and return as a series, series is set to self.amountSpentSeries
