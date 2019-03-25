@@ -31,7 +31,12 @@ class worksheetData:
 
     # get dataframe with record, sort by month then date, return string of sorted data
     def getSortedDataInRecordString(self):
-        rtrString = str(self.getDatafromGsheetsInRecord().sort_values(by=["Month", "Date of expenditure"]))
+        self.getDatafromGsheetsInRecord()
+        uniqueValues = self.dataRecord.loc[:, "Month"].unique()
+        rtrString = ""
+        for i in uniqueValues:
+            rtrString = rtrString + str(self.dataRecord.loc[self.dataRecord["Month"]==int(i), :].sort_values(by=["Month", "Date of expenditure"]))
+            rtrString = rtrString + "\n"
         return rtrString
 
     # get dataframe with record, return string

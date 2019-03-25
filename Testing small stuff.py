@@ -1,3 +1,4 @@
+
 # importing libaries and code
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -187,4 +188,5 @@ c  = c.unique()
 print(c)
 print(type(c))
 for i in c:
-    print(i)
+    print(type(i))
+    print(type(int(i)))
