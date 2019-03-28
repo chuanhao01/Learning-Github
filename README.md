@@ -35,4 +35,5 @@ PS: The libraries can also be downloaded off their respective websites as a pack
 - [ ] Using matplotlib to visualise the results
 - [ ] Adding a user guide
 - [ ] Adding a method to remove data from the Google Sheets in the GUI
+- [ ] Make it compatible for multiple years
 - [ ] Finish Wiki
