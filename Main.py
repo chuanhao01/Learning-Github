@@ -53,7 +53,12 @@ class worksheetData:
     def getPlotForTotalMoneySpentByCategory(self):
         lisOfCategoryData = self.getSortedDataByCategoryList(self.getDatafromGsheetsInRecord())
         for i in lisOfCategoryData:
-            plt.bar([str(i.loc[:, "Category"].unique()[0])], i.loc[:, "Amount"].sum())
+            # plots a bar for each category
+            temp = plt.bar([str(i.loc[:, "Category"].unique()[0])], i.loc[:, "Amount"].sum())
+            for rect in temp:
+                plt.text(rect.get_x() + rect.get_width() / 2.0, rect.get_height(), "$%d" % int(rect.get_height()), ha='center', va='bottom')
+        plt.xlabel("Categories")
+        plt.ylabel("Total Money Spent")
         plt.show()
 
     # method to call to get string of sorted dataframe(by month then date), returning string

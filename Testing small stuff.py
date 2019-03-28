@@ -46,8 +46,23 @@ class worksheetData:
         lisToReturn = []
         for i in uniqueValues:
             lisToReturn.append(data.loc[data.loc[:, "Category"] == i, :])
-        print(lisToReturn)
+        # print(lisToReturn)
         return lisToReturn
+
+    # method to plot total money spent by category, for button
+    def getPlotForTotalMoneySpentByCategory(self):
+        lisOfCategoryData = self.getSortedDataByCategoryList(self.getDatafromGsheetsInRecord())
+        for i in lisOfCategoryData:
+            # plots a bar for each category
+            temp = plt.bar([str(i.loc[:, "Category"].unique()[0])], i.loc[:, "Amount"].sum())
+            print(temp)
+            print(type(temp))
+            for rect in temp:
+                print(rect)
+                print(type(rect))
+        plt.xlabel("Categories")
+        plt.ylabel("Total Money Spent")
+        plt.show()
 
     # method to call to get string of sorted dataframe(by month then date), returning string
     def getSortedDataInRecordString(self):
@@ -132,6 +147,7 @@ class GUI(UseageGUIFramework, worksheetData):
         self.totalSpentButton.config(command=lambda :self.getDataToShow("Total Spent"))
         self.totalSpentByMonthButton.config(command=lambda :self.getDataToShow("Total Spent\nBy Month"))
         self.getSortedDataButton.config(command=lambda :self.getDataToShow("Get Sorted Data"))
+        self.getTotalMoneySpentByCategoryButton.config(command=lambda :worksheetData.getPlotForTotalMoneySpentByCategory(self))
         # Assigning list for combobox
         self.categoryList = ["Food", "Shopping", "Transport", "Home", "Savings", "Healthcare", "Education", "Groceries", "Work", "Others"]
         self.categoryComboBox.config(values=self.categoryList)
@@ -199,6 +215,8 @@ class GUI(UseageGUIFramework, worksheetData):
 
 
 
-a = worksheetData()
-a.getSortedDataByCategoryList(a.getDatafromGsheetsInRecord())
+root = Tk()
+root.geometry("603x550")
+GUI(root)
+root.mainloop()
 
