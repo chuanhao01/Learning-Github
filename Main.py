@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from tkinter import *
 from Class_Code.GUI_Framework_Code import UseageGUIFramework
+import matplotlib.pyplot as plt
 
 
 class worksheetData:
@@ -29,15 +30,26 @@ class worksheetData:
         self.dataRecord = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
         return self.dataRecord
 
-    # get dataframe with record, sort by month then date, return string of sorted data
-    def getSortedDataInRecordString(self):
-        self.getDatafromGsheetsInRecord()
-        uniqueValues = self.dataRecord.loc[:, "Month"].unique()
-        rtrString = ""
+    # method to call and pass a (year) dataframe as a arg, sort by month then date,
+    # return list of of sorted data with january at the start
+    def getSortedDataInRecordList(self, data):
+        uniqueValues = data.loc[:, "Month"].unique()
+        lisToReturn = []
         for i in uniqueValues:
-            rtrString = rtrString + str(self.dataRecord.loc[self.dataRecord["Month"]==int(i), :].sort_values(by=["Month", "Date of expenditure"]))
+            lisToReturn.append(data.loc[data["Month"]==int(i), :].sort_values(by=["Month", "Date of expenditure"]))
+        print(lisToReturn)
+        return lisToReturn
+
+    # method to call to get string of sorted dataframe(by month then date), returning string
+    def getSortedDataInRecordString(self):
+        lisOfData = self.getSortedDataInRecordList(self.getDatafromGsheetsInRecord())
+        rtrString = ""
+        for i in lisOfData:
+            rtrString = rtrString + str(i)
             rtrString = rtrString + "\n"
         return rtrString
+
+
 
     # get dataframe with record, return string
     def getDataInRecordString(self):
