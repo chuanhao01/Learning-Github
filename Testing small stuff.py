@@ -1,10 +1,11 @@
-
 # importing libaries and code
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import numpy as np
 import pandas as pd
 from tkinter import *
 from Class_Code.GUI_Framework_Code import UseageGUIFramework
+import matplotlib.pyplot as plt
 
 
 class worksheetData:
@@ -29,16 +30,37 @@ class worksheetData:
         self.dataRecord = pd.DataFrame(self.wks.worksheet("Sheet1").get_all_records())
         return self.dataRecord
 
-    # get dataframe with record, sort by month then date, return string of sorted data
+    # method to call and pass a (year) dataframe as a arg, sort by month then date,
+    # return list of of sorted data with january at the start
+    # check for any other method calling this one as we are only considering 1 year(2019) for now
+    def getSortedDataInRecordList(self, data):
+        uniqueValues = data.loc[:, "Month"].unique()
+        lisToReturn = []
+        for i in uniqueValues:
+            lisToReturn.append(data.loc[data["Month"]==int(i), :].sort_values(by=["Month", "Date of expenditure"]))
+        return lisToReturn
+
+    # method to get dataframes sorted by categories, return as a list of dataframes of each category
+    def getSortedDataByCategoryList(self, data):
+        uniqueValues = data.loc[:, "Category"].unique()
+        lisToReturn = []
+        for i in uniqueValues:
+            lisToReturn.append(data.loc[data.loc[:, "Category"] == i, :])
+        print(lisToReturn)
+        return lisToReturn
+
+    # method to call to get string of sorted dataframe(by month then date), returning string
     def getSortedDataInRecordString(self):
-        self.getDatafromGsheetsInRecord()
-        rtrString = str(self.dataRecord.sort_values(by=["Month", "Date of expenditure"]))
+        lisOfData = self.getSortedDataInRecordList(self.getDatafromGsheetsInRecord())
+        rtrString = ""
+        for i in lisOfData:
+            rtrString = rtrString + str(i)
+            rtrString = rtrString + "\n"
         return rtrString
 
     # get dataframe with record, return string
     def getDataInRecordString(self):
-        self.getDatafromGsheetsInRecord()
-        rtrString = str(self.dataRecord)
+        rtrString = str(self.getDatafromGsheetsInRecord())
         return rtrString
 
     # get total spent and return as a series, series is set to self.amountSpentSeries
@@ -177,16 +199,6 @@ class GUI(UseageGUIFramework, worksheetData):
 
 
 
-# root = Tk()
-# root.geometry("603x550")
-# GUI(root)
-# root.mainloop()
 a = worksheetData()
-b = pd.DataFrame(a.wks.worksheet("Sheet1").get_all_records())
-c = b.loc[:, "Month"]
-c  = c.unique()
-print(c)
-print(type(c))
-for i in c:
-    print(type(i))
-    print(type(int(i)))
+a.getSortedDataByCategoryList(a.getDatafromGsheetsInRecord())
+

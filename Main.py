@@ -32,13 +32,23 @@ class worksheetData:
 
     # method to call and pass a (year) dataframe as a arg, sort by month then date,
     # return list of of sorted data with january at the start
+    # check for any other method calling this one as we are only considering 1 year(2019) for now
     def getSortedDataInRecordList(self, data):
         uniqueValues = data.loc[:, "Month"].unique()
         lisToReturn = []
         for i in uniqueValues:
             lisToReturn.append(data.loc[data["Month"]==int(i), :].sort_values(by=["Month", "Date of expenditure"]))
-        print(lisToReturn)
         return lisToReturn
+
+    # method to get dataframes sorted by categories, return as a list of dataframes of each category
+    def getSortedDataByCategoryList(self, data):
+        uniqueValues = data.loc[:, "Category"].unique()
+        lisToReturn = []
+        for i in uniqueValues:
+            lisToReturn.append(data.loc[data.loc[:, "Category"] == i, :])
+        # print(lisToReturn)
+        return lisToReturn
+
 
     # method to call to get string of sorted dataframe(by month then date), returning string
     def getSortedDataInRecordString(self):
