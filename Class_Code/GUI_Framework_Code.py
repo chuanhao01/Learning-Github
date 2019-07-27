@@ -125,8 +125,8 @@ class UseageGUIFramework(Frame):
         self.getSortedDataButton.grid(row=0, column=0)
         self.getSortedDataButton.grid(sticky="nsew")
         # Button to get total money spent by category
-        self.getTotalMoneySpentByCategoryFrame = Frame(self, height=40, width=100)
-        self.getTotalMoneySpentByCategoryFrame.grid(row=9, column=2, columnspan=2, sticky=W+E)
+        self.getTotalMoneySpentByCategoryFrame = Frame(self, height=40, width=200)
+        self.getTotalMoneySpentByCategoryFrame.grid(row=9, column=2, columnspan=2)
         self.getTotalMoneySpentByCategoryFrame.grid_propagate(False)
         self.getTotalMoneySpentByCategoryFrame.rowconfigure(0, weight=1)
         self.getTotalMoneySpentByCategoryFrame.columnconfigure(0, weight=1)
